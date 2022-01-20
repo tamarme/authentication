@@ -49,9 +49,7 @@ const register = async (req, res) => {
             hash,
             salt
         });
-        console.log('movida1');
         const { token, expires } = issueJWT(user); // doesn't work
-        console.log('movida2');
         res.status(201).json({
             success: true,
             user: {
