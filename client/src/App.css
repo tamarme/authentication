@@ -1,0 +1,45 @@
+.App {
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container input {
+  padding: 10px 12px;
+  margin: 10px;
+}
+
+.container button {
+  width: 150px;
+  padding: 10px 12px;
+  margin: 10px;
+  border: 0;
+  outline: 0;
+  color: white;
+  background-color: rgb(11, 68, 49);
+  cursor: pointer;
+}
+
+.container button:hover {
+  background-color: rgb(25, 109, 81);
+}
