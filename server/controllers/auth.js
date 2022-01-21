@@ -61,9 +61,9 @@ const register = async (req, res) => {
             expires
         });
     } catch (error) {
-        res.status(500).json({
+        res.status(409).json({
             success: false,
-            error,
+            error: error.message,
             user: null
         });
     }

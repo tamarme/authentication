@@ -28,7 +28,9 @@ function issueJWT(user) {
         sub: _id,
         iat: Date.now()
     };
-    const signedToken = jsonwebtoken.sign(payload, process.env.SECRET, { expiresIn, algorithm: 'RS256' });
+
+    const secret = process.env.SECRET || 'FcwLw+*QA9jV"a^P=`{4Ze';
+    const signedToken = jsonwebtoken.sign(payload, secret, { expiresIn: expiresIn });
     return {
         token: "Bearer " + signedToken,
         expires: expiresIn
