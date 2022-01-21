@@ -1,8 +1,12 @@
 const { validPassword, genPassword, issueJWT } = require('../utils');
 const User = require('../models/User');
 
-const home = (req, res) => {
-    res.json({ message: 'home' });
+const home = async (req, res) => {
+    const users = await User.find({}, { hash: 0, salt: 0 });
+    res.json({
+        success: true,
+        users
+    });
 }
 
 const login = async (req, res) => {
@@ -18,6 +22,10 @@ const login = async (req, res) => {
     const isValid = validPassword(password, hash, salt);
     if (isValid) {
         const { token, expires } = issueJWT(user);
+        res.cookie('jwt', token, {
+            maxAge: Number(expires),
+            httpOnly: true
+        });
         res.status(200).json({
             success: true,
             user: {
@@ -50,6 +58,10 @@ const register = async (req, res) => {
             salt
         });
         const { token, expires } = issueJWT(user);
+        res.cookie('jwt', token, {
+            maxAge: Number(expires),
+            httpOnly: true
+        });
         res.status(201).json({
             success: true,
             user: {

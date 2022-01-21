@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const jsonwebtoken = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 
@@ -22,7 +22,7 @@ function genPassword(password) {
 function issueJWT(user) {
     const _id = user._id;
 
-    const expiresIn = '1d';
+    const expiresIn = '1000000';
 
     const payload = {
         sub: _id,
@@ -30,12 +30,11 @@ function issueJWT(user) {
     };
 
     const secret = process.env.SECRET || 'FcwLw+*QA9jV"a^P=`{4Ze';
-    const signedToken = jsonwebtoken.sign(payload, secret, { expiresIn: expiresIn });
+    const signedToken = jwt.sign(payload, secret, { expiresIn: expiresIn });
     return {
-        token: "Bearer " + signedToken,
+        token: signedToken,
         expires: expiresIn
     }
-
 }
 
 module.exports = {

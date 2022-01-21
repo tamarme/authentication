@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { login } from './loginAPI';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState({ email: null, password: null });
 
     const handleChange = event => setUser({ ...user, [event.target.name]: event.target.value });
 
     const handleClick = async () => {
-        const response = await login(user);
-        console.log(response);
+        await login(user);
+        navigate('/');
     }
 
     return <div>

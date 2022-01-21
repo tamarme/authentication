@@ -5,19 +5,23 @@ const errorHandler = require('./middlewares/error-handler');
 const authRoutes = require('./routes/auth');
 const passport = require('passport');
 const strategy = require('./config/passport');
+const cookieParser = require('cookie-parser');
 
 const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(passport.initialize());
 passport.use(strategy);
 // routes
-// app.post('/api/v1/register', (req, res) => res.json({ mda: 'huh' }))
 app.use('/api/v1', authRoutes);
 
 // middlewares

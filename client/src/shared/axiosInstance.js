@@ -1,10 +1,13 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
+    withCredentials: true,
+    credentials: 'include',
     baseURL: 'http://localhost:3001/api/v1',
     headers: {
         post: {
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Origin': 'http://localhost:3001',
             'Content-Type': 'application/json'
         }
     }

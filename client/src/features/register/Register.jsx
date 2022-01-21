@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { register } from './registerAPI';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-
+    const navigate = useNavigate();
     const [user, setUser] = useState({
         firstname: null,
         lastname: null,
@@ -13,8 +14,8 @@ const Register = () => {
     const handleChange = event => setUser({ ...user, [event.target.name]: event.target.value });
 
     const handleClick = async () => {
-        const response = await register(user);
-        console.log(response);
+        await register(user);
+        navigate('/');
     }
 
     return <div>
