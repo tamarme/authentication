@@ -15,7 +15,8 @@ const registerSchema = [
         .isEmail()
         .withMessage('provide valid email address')
         .custom(async (value) => {
-            const user = User.findOne({ email: value })
+            const user = await User.findOne({ email: value });
+            console.log(user);
             if (user) {
                 return Promise.reject('E-mail already in use');
             }

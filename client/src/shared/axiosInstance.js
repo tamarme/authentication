@@ -16,10 +16,9 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
     response => response,
     async (error) => {
-        if (error.response.status === 401) {
+        if (error.response?.status === 401) {
             if (window.location.href.indexOf("/login") === -1) { window.location = "/login" }
         } else {
-            console.log(error);
             return Promise.reject(error);
         }
     }
