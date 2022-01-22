@@ -1,0 +1,106 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Authentication"
+  },
+  "basePath": "/api/v1",
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "users (protected route | login or register)",
+        "description": "users",
+        "operationId": "users",
+        "produces": "application/json",
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "login",
+        "description": "login",
+        "operationId": "login",
+        "produces": "application/json",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "List of user object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "summary": "register",
+        "description": "",
+        "operationId": "register",
+        "produces": "application/json",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "register",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Register"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {    
+    "Register": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

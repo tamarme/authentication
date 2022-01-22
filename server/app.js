@@ -7,6 +7,8 @@ const authRoutes = require('./routes/auth');
 const passport = require('passport');
 const strategy = require('./config/passport');
 const cookieParser = require('cookie-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const cors = require('cors');
 require('dotenv').config();
@@ -24,6 +26,7 @@ app.use(passport.initialize());
 passport.use(strategy);
 // routes
 app.use('/api/v1', authRoutes);
+app.use('/api/v1/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // middlewares
 app.use(notFound);
