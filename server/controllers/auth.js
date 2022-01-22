@@ -14,7 +14,7 @@ const login = async (req, res) => {
     const user = await User.findOne({ email: email });
     if (!user) return res.status(401).json({
         success: false,
-        error: "User diesn't exist.",
+        error: "User doesn't exist.",
         user: null
     });
 
@@ -32,9 +32,7 @@ const login = async (req, res) => {
                 firstname: user.firstname,
                 lastname: user.lastname,
                 email
-            },
-            token,
-            expires
+            }
         });
     } else {
         res.status(401).json({
@@ -68,12 +66,10 @@ const register = async (req, res) => {
                 firstname,
                 lastname,
                 email
-            },
-            token,
-            expires
+            }
         });
     } catch (error) {
-        res.status(409).json({
+        res.status(500).json({
             success: false,
             error: error.message,
             user: null
