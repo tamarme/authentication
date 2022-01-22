@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { register } from './registerAPI';
 import { useNavigate } from 'react-router-dom';
+import ErrorHandler from '../../shared/error/ErrorHandler';
 
 const Register = () => {
     const navigate = useNavigate();
+    const [error, setError] = useState(null);
     const [user, setUser] = useState({
         firstname: null,
         lastname: null,
@@ -14,11 +16,16 @@ const Register = () => {
     const handleChange = event => setUser({ ...user, [event.target.name]: event.target.value });
 
     const handleClick = async () => {
-        await register(user);
-        navigate('/');
+        try {
+            const response = await register(user);
+            if (response.status === 201) navigate('/');
+        } catch (err) {
+            setError(err.response?.data?.error);
+        }
     }
 
     return <div>
+        {error && <ErrorHandler error={error} callback={() => setError(null)} />}
         <h1>Register</h1>
         <div className='container'>
             <input

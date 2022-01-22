@@ -18,6 +18,7 @@ axiosInstance.interceptors.response.use(
     async (error) => {
         if (error.response?.status === 401) {
             if (window.location.href.indexOf("/login") === -1) { window.location = "/login" }
+            else return Promise.reject(error);
         } else {
             return Promise.reject(error);
         }

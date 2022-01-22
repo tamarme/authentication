@@ -1,1 +1,1 @@
-module.exports = (err, req, res, next) => res.status(500).json({ error: err });
+module.exports = (err, req, res, next) => res.status(err.code || 500).json({ error: err.message });

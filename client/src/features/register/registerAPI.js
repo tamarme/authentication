@@ -6,6 +6,6 @@ export const register = async (data) => {
     try {
         return await axiosInstance.post(url, data)
     } catch (error) {
-        console.log(error);
+        return Promise.reject(error);
     }
-};
+}; 

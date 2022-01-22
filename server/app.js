@@ -1,4 +1,5 @@
 const express = require('express');
+require('express-async-errors');
 const connect = require('./config/database');
 const notFound = require('./middlewares/not-found');
 const errorHandler = require('./middlewares/error-handler');
