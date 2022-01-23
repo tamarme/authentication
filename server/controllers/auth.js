@@ -9,6 +9,12 @@ const home = async (req, res) => {
     });
 }
 
+const loggedInUser = async (req, res) => {
+    const id = req.user._conditions._id;
+    const user = await User.findById({ _id: id }, { hash: 0, salt: 0 });
+    res.json({ user });
+}
+
 const login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
@@ -69,6 +75,7 @@ const register = async (req, res) => {
 
 module.exports = {
     home,
+    loggedInUser,
     login,
     register
 }
