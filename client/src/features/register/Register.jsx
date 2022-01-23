@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { register } from './registerAPI';
 import { useNavigate } from 'react-router-dom';
 import ErrorHandler from '../../shared/error/ErrorHandler';
+import axiosInstance from '../../shared/axiosInstance';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Register = () => {
 
     const handleClick = async () => {
         try {
-            const response = await register(user);
+            const response = await axiosInstance.post('/register', user)
             if (response.status === 201) navigate('/');
         } catch (err) {
             setError(err.response?.data?.error);
@@ -44,14 +44,12 @@ const Register = () => {
                 type='email'
                 name='email'
                 placeholder='email'
-                required
                 onChange={handleChange}
             />
             <input
                 type='password'
                 name='password'
                 placeholder='password'
-                required
                 onChange={handleChange}
             />
 

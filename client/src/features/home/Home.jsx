@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import User from './User';
-import { fetchUsers } from './homeAPI';
 import ErrorHandler from '../../shared/error/ErrorHandler';
+import axiosInstance from "../../shared/axiosInstance";
 
 const Home = () => {
     const [users, setUsers] = useState([]);
@@ -12,9 +12,8 @@ const Home = () => {
         setLoading(true);
         (async function () {
             try {
-                const response = await fetchUsers();
-                setUsers(response);
-
+                const response = await axiosInstance.get('/');
+                setUsers(response.data.users);
             } catch (err) {
                 setError(err.response?.data?.error);
             }

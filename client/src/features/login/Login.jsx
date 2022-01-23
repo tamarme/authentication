@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { login } from './loginAPI';
 import { useNavigate } from 'react-router-dom';
 import ErrorHandler from '../../shared/error/ErrorHandler';
+import axiosInstance from '../../shared/axiosInstance';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -9,10 +9,10 @@ const Login = () => {
     const [error, setError] = useState(null);
 
     const handleChange = event => setUser({ ...user, [event.target.name]: event.target.value });
-
+ 
     const handleClick = async () => {
         try {
-            const response = await login(user);
+            const response = await axiosInstance.post('/login', user);
             if (response.status === 200) navigate('/');
         } catch (err) {
             setError(err.response?.data?.error);
